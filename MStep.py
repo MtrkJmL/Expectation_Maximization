@@ -1,4 +1,5 @@
 import numpy as np
+from getLogLikelihood import getLogLikelihood
 
 def MStep(gamma, X):
     # Maximization step of the EM Algorithm
@@ -22,5 +23,9 @@ def MStep(gamma, X):
             sum= sum + gamma[n,j]*np.outer((X[n]-means[j]),(X[n]-means[j]).T)
         covariances[:,:,j]=sum/N_new[j]
 
+    logLikelihood = getLogLikelihood(means, weights, covariances, X)
 
-    return weights, means, covariances
+
+
+
+    return weights, means, covariances, logLikelihood
